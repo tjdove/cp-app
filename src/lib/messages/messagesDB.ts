@@ -5,22 +5,17 @@ import { Message } from '@/types/messages';
 
 let db: Database | null = null;
 
+// Open the SQLite database
 async function getDb(): Promise<Database> {
-  if (!db) {
-    db = await open({
-      filename: '/lib/messages/cp-app.db',
+  try {
+    return await open({
+      filename: './src/lib/messages/cp-app.db',
       driver: sqlite3.Database,
     });
-    // Create messages table if it doesn't exist
-    // await db.exec(`
-    //   CREATE TABLE IF NOT EXISTS messages (
-    //     id TEXT PRIMARY KEY,
-    //     content TEXT NOT NULL,
-    //     timestamp INTEGER NOT NULL
-    //   )
-    // `);
+  } catch (error) {
+    console.error('Error opening database:', error);
+    throw error;
   }
-  return db;
 }
 
 export async function saveMessage(content: string): Promise<Message> {
@@ -44,9 +39,11 @@ export async function saveMessage(content: string): Promise<Message> {
   return message;
 }
 
+
+//await db.all('SELECT * FROM messages'); ORDER BY timestamp DESC
 export async function getMessages(): Promise<Message[]> {
   const db = await getDb();
-  return db.all<Message[]>('SELECT * FROM messages ORDER BY timestamp DESC');
+  return db.all<Message[]>('SELECT * FROM messages');
 }
 
 export async function deleteMessage(id: string): Promise<void> {

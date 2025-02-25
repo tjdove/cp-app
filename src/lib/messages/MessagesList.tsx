@@ -1,46 +1,37 @@
 "use client"
+import { useEffect, useState } from 'react';
+import { Message } from '@/types/messages'; // Import the Message type
 
-import { Message } from "@/types/messages";
-import { getMessages } from "@/lib/messages/messagesDB";
-import React, { useState, useEffect } from "react";
-
-const MessageList: React.FC = () => {
-  // State to hold the messages
+export default function MessagesPage() {
   const [messages, setMessages] = useState<Message[]>([]);
-  const [loading, setLoading] = useState<boolean>(true);
-  const [error, setError] = useState<string | null>(null);
 
-  // Fetch messages when the component mounts
   useEffect(() => {
-    const fetchMessages = async () => {
+    async function fetchMessages() {
       try {
-        const data = await getMessages(); // Using await here
+        const response = await fetch('/api/messages'); // Call the API endpoint
+        if (!response.ok) {
+          throw new Error('Failed to fetch messages');
+        }
+        const data: Message[] = await response.json();
         setMessages(data);
-      } catch (err) {
-        setError("Failed to load messages");
-        console.error(err);
-      } finally {
-        setLoading(false);
+      } catch (error) {
+        console.error('Error fetching messages:', error);
       }
-    };
+    }
 
-    fetchMessages(); // Call the async function
-  }, []); // Empty dependency array means it runs once on mount
-
-  // Render based on state
-  if (loading) return <p>Loading...</p>;
-  if (error) return <p>{error}</p>;
+    fetchMessages();
+  }, []);
 
   return (
     <div>
       <h1>Messages</h1>
       <ul>
         {messages.map((message) => (
-          <li key={message.id}>{message.content}</li>
+          <li key={message.id}>
+            {message.content} - {new Date(message.timestamp).toLocaleString()}
+          </li>
         ))}
       </ul>
     </div>
   );
-};
-
-export default MessageList;
+}
