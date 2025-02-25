@@ -8,7 +8,7 @@ let db: Database | null = null;
 async function getDb(): Promise<Database> {
   if (!db) {
     db = await open({
-      filename: './cp-app.db',
+      filename: '/lib/messages/cp-app.db',
       driver: sqlite3.Database,
     });
     // Create messages table if it doesn't exist

@@ -23,7 +23,7 @@ INSERT INTO messages (id, userId, messageType, content, timestamp)
 VALUES ('msg_008', 'user_456', 'audio', 'https://example.com/audio.mp3', 1708904000);
 
 INSERT INTO messages (id, userId, messageType, content, timestamp) 
-VALUES ('msg_009', 'user_789', 'text', 'I'll visit the store tomorrow', 1708907600);
+VALUES ('msg_009', 'user_789', 'text', 'Ill visit the store tomorrow', 1708907600);
 
 INSERT INTO messages (id, userId, messageType, content, timestamp) 
 VALUES ('msg_010', 'user_123', 'file', 'https://example.com/document.pdf', 1708911200);

@@ -1,5 +1,6 @@
 import { Card } from "@/components/ui/card";
 import LinkSubmissionForm from "@/components/ui/LinkSubmissionForm";
+import MessageList from "@/lib/messages/MessagesList";
 
 
 export default function Home() {
@@ -11,6 +12,7 @@ export default function Home() {
             <h1 className="text-2xl font-bold">Welcome to OnlyLinks...</h1>
             We get it done.
             {/* <LinkSubmissionForm /> */}
+            <MessageList/>
           </div>
         </Card>
       </div>

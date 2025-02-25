@@ -2,21 +2,23 @@
 import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Textarea } from "@/components/ui/textarea";
-import { useState } from "react";
+//import { useState } from "react";
 import { Paperclip } from "lucide-react";
 import { Message } from "@/types/messages";
 import { getMessages } from "@/lib/messages/messagesDB"; 
+import React, { useState, useEffect } from "react";
+
 interface FormProps {
   // Add props if needed, e.g., onSubmit: () => void;
 }
 //getMessages(): Promise<Message[]> 
 
-export default async function Home({}: FormProps) {
+export default function Home({}: FormProps) {
   const [message, setMessage] = useState("");
-  const loadedMessages: Message[] = await getMessages();
+  // const loadedMessages: Message[] = await getMessages();
 
 
-  const [messages, setMessages] = useState<Message[]>([]);
+  // const [messages, setMessages] = useState<Message[]>([]);
   const handleSubmit = (event: React.FormEvent) => {
     event.preventDefault();
     console.log('Form submitted with value:', message);
