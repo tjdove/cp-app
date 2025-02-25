@@ -8,17 +8,17 @@ let db: Database | null = null;
 async function getDb(): Promise<Database> {
   if (!db) {
     db = await open({
-      filename: './messages.db',
+      filename: './cp-app.db',
       driver: sqlite3.Database,
     });
     // Create messages table if it doesn't exist
-    await db.exec(`
-      CREATE TABLE IF NOT EXISTS messages (
-        id TEXT PRIMARY KEY,
-        content TEXT NOT NULL,
-        timestamp INTEGER NOT NULL
-      )
-    `);
+    // await db.exec(`
+    //   CREATE TABLE IF NOT EXISTS messages (
+    //     id TEXT PRIMARY KEY,
+    //     content TEXT NOT NULL,
+    //     timestamp INTEGER NOT NULL
+    //   )
+    // `);
   }
   return db;
 }

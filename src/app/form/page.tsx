@@ -38,12 +38,12 @@ const TwoButtonForm: React.FC<FormProps> = () => {
       </div>
 
       {/* First button: Submits the form */}
-      <button type="submit">Submit</button>
+      <Button type="submit">Submit</Button>
 
       {/* Second button: Triggers a different action */}
-      <button type="button" onClick={handleOtherAction}>
+      <Button type="button" onClick={handleOtherAction}>
         Do Something Else
-      </button>
+      </Button>
     </form>
   );
 };
