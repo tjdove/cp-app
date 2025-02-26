@@ -1,16 +1,25 @@
 "use client"
-import { Message } from '@/types/messages';
-import { Card, CardHeader, CardTitle, CardContent, CardFooter } from '@/components/ui/card';
-import { Button } from '@/components/ui/button';
-import { Trash2 } from "lucide-react";
-import { Badge } from '@/components/ui/badge';
+import { Message } from "@/types/messages"
+import {
+  Card,
+  CardHeader,
+  CardTitle,
+  CardContent,
+  CardFooter,
+} from "@/components/ui/card"
+import { Button } from "@/components/ui/button"
+import { Trash2 } from "lucide-react"
+import { Badge } from "@/components/ui/badge"
 
 interface MessagesListProps {
-  messages: Message[];
-  onDelete: (id: number) => void;
+  messages: Message[]
+  onDelete: (id: number) => void
 }
 
-export default function MessagesList({ messages, onDelete }: MessagesListProps) {
+export default function MessagesList({
+  messages,
+  onDelete,
+}: MessagesListProps) {
   return (
     <div className="min-h-screen bg-gradient-to-br from-blue-50 to-purple-50 p-8">
       <div className="max-w-4xl mx-auto">
@@ -24,8 +33,8 @@ export default function MessagesList({ messages, onDelete }: MessagesListProps) 
 
         <div className="space-y-4">
           {messages.map((message) => (
-            <Card 
-              key={message.id} 
+            <Card
+              key={message.id}
               className="hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1 border-l-4 border-primary rounded-lg overflow-hidden"
             >
               <CardContent className="pt-2">
@@ -34,7 +43,13 @@ export default function MessagesList({ messages, onDelete }: MessagesListProps) 
                 </p>
               </CardContent>
               <CardFooter className="flex justify-end pb-4">
-                <Badge variant={message.messageType === 'text' ? 'outline' : 'secondary'} className="mb-2" key={message.id}>
+                <Badge
+                  variant={
+                    message.messageType === "text" ? "outline" : "secondary"
+                  }
+                  className="mb-2"
+                  key={message.id}
+                >
                   <span className="text-xs text-muted-foreground font-mono">
                     {new Date(message.timestamp).toLocaleString("en-US", {
                       year: "numeric",
@@ -68,5 +83,5 @@ export default function MessagesList({ messages, onDelete }: MessagesListProps) 
         </div>
       </div>
     </div>
-  );
+  )
 }
