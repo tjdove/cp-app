@@ -1,9 +1,12 @@
 "use client"
 import { useEffect, useState } from 'react';
 import { Message } from '@/types/messages';
-import { Card, CardHeader, CardTitle, CardContent } from '@/components/ui/card';
+import { Card, CardHeader, CardTitle, CardContent, CardFooter } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 //import { Typography } from '@/components/ui/typography';
+import { Trash2 } from "lucide-react";
+import { Badge } from '@/components/ui/badge';
+// import { useClipboard } from 'use-clipboard-copy';
 
 export default function MessagesPage() {
   const [messages, setMessages] = useState<Message[]>([]);
@@ -60,23 +63,45 @@ export default function MessagesPage() {
 
         <div className="space-y-4">
           {messages.map((message) => (
-            <Card key={message.id} className="hover:shadow-lg transition-shadow">
-              <CardContent className="p-6">
-                <h1  className="text-lg text-gray-800">
-                  {message.content}
-                </h1>
-                <span  className="text-sm text-gray-500 mt-2">
-                  {new Date(message.timestamp).toLocaleString()}
-                </span>
-                <Button
-                  variant="destructive"
-                  className="mt-4"
-                  onClick={() => handleDelete(Number(message.id))}
-                >
-                  Delete - {message.id}
-                </Button>
-              </CardContent>
-            </Card>
+            <Card 
+  key={message.id} 
+  className="hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1 border-l-4 border-primary rounded-lg overflow-hidden"
+>
+  <CardHeader className="pb-2">
+      <Badge variant={message.messageType === 'text' ? 'outline' : 'secondary'} className="mb-2" key={message.id}>
+      {/* <Badge variant={message.messageType === 'text' ? 'outline' : 'secondary'} className="mb-2">
+        {message.messageType}
+      </Badge> */}
+      <span className="text-xs text-muted-foreground font-mono">
+        {new Date(message.timestamp).toLocaleString("en-US", {
+          year: "numeric",
+          month: "numeric",
+          day: "numeric",
+          weekday: "short",
+          hour: "numeric",
+          minute: "2-digit",
+          hour12: true,
+        })}
+      </span>
+    </Badge>
+  </CardHeader>
+  <CardContent className="pt-0">
+    <p className="text-base font-medium text-card-foreground leading-relaxed">
+      {message.content}
+    </p>
+  </CardContent>
+  <CardFooter className="flex justify-end pb-4">
+    <Button
+      variant="ghost"
+      size="sm"
+      className="text-destructive hover:bg-destructive/10 hover:text-destructive"
+      onClick={() => handleDelete(Number(message.id))}
+    >
+      <Trash2 className="h-4 w-4 mr-2" />
+      <span>Delete</span>
+    </Button>
+  </CardFooter>
+</Card>
           ))}
         </div>
 
