@@ -1,9 +1,50 @@
+"use client"
+import { useEffect, useState } from "react";
 import { Card } from "@/components/ui/card";
 import LinkSubmissionForm from "@/components/ui/LinkSubmissionForm";
-import MessageList from "@/lib/messages/MessagesList";
-
+import MessagesList from "@/lib/messages/MessagesList";
+import { Message } from "@/types/messages";
 
 export default function Home() {
+  const [messages, setMessages] = useState<Message[]>([]);
+
+  useEffect(() => {
+    async function fetchMessages() {
+      try {
+        const response = await fetch('/api/messages');
+        if (!response.ok) {
+          throw new Error('Failed to fetch messages');
+        }
+        const data: Message[] = await response.json();
+        setMessages(data);
+      } catch (error) {
+        console.error('Error fetching messages:', error);
+      }
+    }
+
+    fetchMessages();
+  }, []);
+
+  const handleDelete = async (id: number) => {
+    try {
+      const response = await fetch('/api/messages', {
+        method: 'DELETE',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ id }),
+      });
+
+      if (!response.ok) {
+        throw new Error('Failed to delete message');
+      }
+
+      setMessages((prevMessages) => prevMessages.filter((message) => message.id !== id.toString()));
+    } catch (error) {
+      console.error('Error deleting message:', error);
+    }
+  };
+
   return (
     <>
       <div className="flex flex-col border-dotted items-center justify-center min-h-screen p-4">
@@ -12,7 +53,7 @@ export default function Home() {
             <h1 className="text-2xl font-bold">Welcome to OnlyLinks...</h1>
             We get it done.
             <LinkSubmissionForm />
-            <MessageList/>
+            <MessagesList messages={messages} onDelete={handleDelete} />
           </div>
         </Card>
       </div>
@@ -29,5 +70,5 @@ export default function Home() {
         </div>
       </div>
     </>
-  )
+  );
 }

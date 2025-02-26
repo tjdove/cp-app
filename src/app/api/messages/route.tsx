@@ -17,19 +17,6 @@ export async function GET(): Promise<NextResponse<Message[] | { error: string }>
   }
 }
 
-// export async function DELETE(request: NextRequest) {
-//   try {
-//     const { id } = await request.json();
-//     if (!id) {
-//       return NextResponse.json({ error: 'ID is required' }, { status: 400 });
-//     }
-//     await deleteMessage(id);
-//     return NextResponse.json({ success: true });
-//   } catch (error) {
-//     return NextResponse.json({ error: 'Failed to delete message' }, { status: 500 });
-//   }
-// }
-
 // Handle DELETE requests (delete a message by ID)
 export async function DELETE(request: NextRequest): Promise<NextResponse<{ success: boolean } | { error: string }>> {
   try {
@@ -44,8 +31,6 @@ export async function DELETE(request: NextRequest): Promise<NextResponse<{ succe
     return NextResponse.json({ error: 'Failed to delete message' }, { status: 500 });
   }
 }
-//deleteMessage()
-
 
 // Handle POST requests (add a message)
 // export async function POST(request: Request) {
