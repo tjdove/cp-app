@@ -40,12 +40,12 @@ export async function saveMessage(content: string): Promise<Message> {
 }
 
 
-//await db.all('SELECT * FROM messages'); ORDER BY timestamp DESC
+//await db.all('SELECT * FROM messages'); 
 export async function getMessages(): Promise<Message[]> {
   const db = await getDb();
-  return db.all<Message[]>('SELECT * FROM messages');
+  return db.all<Message[]>('SELECT * FROM messages ORDER BY timestamp DESC');
 }
-
+ // Delete a message by ID
 export async function deleteMessage(id: string): Promise<void> {
   const db = await getDb();
   await db.run('DELETE FROM messages WHERE id = ?', id);

@@ -11,7 +11,7 @@ export default function Home() {
           <div className="flex flex-col items-center justify-center w-full max-w-md p-6 space-y-4 bg-white rounded-lg shadow-md">
             <h1 className="text-2xl font-bold">Welcome to OnlyLinks...</h1>
             We get it done.
-            {/* <LinkSubmissionForm /> */}
+            <LinkSubmissionForm />
             <MessageList/>
           </div>
         </Card>

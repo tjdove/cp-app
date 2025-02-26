@@ -45,7 +45,7 @@ export default function Home({}: FormProps) {
           name="message"
           id="message"
           placeholder="Paste your link here..."
-          rows={10}
+          rows={4}
           maxLength={800}
           autoFocus
           value={message}
