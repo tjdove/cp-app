@@ -3,8 +3,6 @@ import sqlite3 from "sqlite3"
 import { open, Database } from "sqlite"
 import { Message } from "@/types/messages"
 
-let db: Database | null = null
-
 // Open the SQLite database
 async function getDb(): Promise<Database> {
   try {

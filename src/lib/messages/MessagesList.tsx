@@ -1,12 +1,6 @@
 "use client"
 import { Message } from "@/types/messages"
-import {
-  Card,
-  CardHeader,
-  CardTitle,
-  CardContent,
-  CardFooter,
-} from "@/components/ui/card"
+import { Card, CardTitle, CardContent, CardFooter } from "@/components/ui/card"
 import { Button } from "@/components/ui/button"
 import { Trash2 } from "lucide-react"
 import { Badge } from "@/components/ui/badge"
@@ -21,14 +15,13 @@ export default function MessagesList({
   onDelete,
 }: MessagesListProps) {
   return (
-    <div className="min-h-screen bg-gradient-to-br from-blue-50 to-purple-50 p-8">
+    //min-h-screen removed
+    <div className=" bg-gradient-to-br from-blue-50 to-purple-50 p-8">
       <div className="max-w-4xl mx-auto">
-        <Card className="mb-8">
-          <CardHeader>
-            <CardTitle className="text-3xl font-bold text-center">
-              Messages
-            </CardTitle>
-          </CardHeader>
+        <Card className="mb-1">
+          <CardTitle className="text-3xl font-bold text-center">
+            Links
+          </CardTitle>
         </Card>
 
         <div className="space-y-4">
@@ -69,7 +62,7 @@ export default function MessagesList({
                   onClick={() => onDelete(Number(message.id))}
                 >
                   <Trash2 className="h-4 w-4 mr-2" />
-                  <span>Delete - {message.id}</span>
+                  <span>Delete</span>
                 </Button>
               </CardFooter>
             </Card>
