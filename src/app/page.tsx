@@ -11,6 +11,7 @@ export default function Home() {
   useEffect(() => {
     async function fetchMessages() {
       try {
+        // Fetch messages from the API
         const response = await fetch("/api/messages")
         if (!response.ok) {
           throw new Error("Failed to fetch messages")
@@ -27,6 +28,7 @@ export default function Home() {
 
   const handleDelete = async (id: number) => {
     try {
+      // Send a DELETE request to the API to delete the message
       const response = await fetch("/api/messages", {
         method: "DELETE",
         headers: {
@@ -34,13 +36,13 @@ export default function Home() {
         },
         body: JSON.stringify({ id }),
       })
-
+      // Check if the response is OK (status code 200-299)
       if (!response.ok) {
         throw new Error("Failed to delete message")
       }
-
+      // Remove the deleted message from the state
       setMessages((prevMessages) =>
-        prevMessages.filter((message) => message.id !== id.toString())
+        prevMessages.filter((message) => message.id !== id)
       )
     } catch (error) {
       console.error("Error deleting message:", error)

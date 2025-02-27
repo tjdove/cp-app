@@ -1,5 +1,5 @@
 CREATE TABLE messages (
-    id TEXT PRIMARY KEY,
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
     userId TEXT NOT NULL,
     messageType TEXT NOT NULL,
     content TEXT NOT NULL,

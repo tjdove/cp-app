@@ -1,8 +1,10 @@
 //The API Layer to provde for Cross-Platfom
 import { NextResponse, NextRequest } from "next/server"
-// import sqlite3 from 'sqlite3';
-// import { open } from 'sqlite';
-import { getMessages, deleteMessage } from "@/lib/messages/messagesDB"
+import {
+  getMessages,
+  deleteMessage,
+  saveMessage,
+} from "@/lib/messages/messagesDB"
 import { Message } from "@/types/messages"
 
 // Handle GET requests (retrieve all messages)
@@ -10,6 +12,7 @@ export async function GET(): Promise<
   NextResponse<Message[] | { error: string }>
 > {
   try {
+    // Fetch messages from the database
     const messages: Message[] = await getMessages()
     return NextResponse.json(messages, { status: 200 })
   } catch (error) {
@@ -41,16 +44,17 @@ export async function DELETE(
   }
 }
 
-// Handle POST requests (add a message)
-// export async function POST(request: Request) {
-//   const db = await getDb();
-//   const { id, userId, messageId, messageType, content, timestamp } = await request.json();
-//   await db.run(
-//     'INSERT INTO messages (id, userId, messageId, messageType, content, timestamp) VALUES (?, ?, ?, ?, ?, ?)',
-//     [id, userId, messageId, messageType, content, timestamp]
-//   );
-//   return NextResponse.json(
-//     { message: 'Message added', data: { id, userId, messageId, messageType, content, timestamp } },
-//     { status: 201 }
-//   );
-// }
+//Handle POST requests (add a message)
+export async function POST(
+  request: NextRequest
+): Promise<NextResponse<Message | { error: string }>> {
+  // Parse the request body to get the message content
+  const content = await request.json()
+
+  // const testString = content.toString()
+  // console.log("Test String:", testString)
+  // console.log("Test String 2:", testString2)
+  // console.log("Content:", content)
+  const newMessage = await saveMessage(content.content)
+  return NextResponse.json(newMessage, { status: 201 })
+}

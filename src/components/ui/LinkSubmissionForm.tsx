@@ -14,6 +14,7 @@ export default function LinkSubmissionForm({ onSubmit }: FormProps) {
 
   const handleSubmit = (event: React.FormEvent) => {
     event.preventDefault()
+    console.log("Message submitted:", message)
     onSubmit(message)
     setMessage("")
   }

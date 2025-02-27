@@ -69,7 +69,7 @@ export default function MessagesList({
                   onClick={() => onDelete(Number(message.id))}
                 >
                   <Trash2 className="h-4 w-4 mr-2" />
-                  <span>Delete</span>
+                  <span>Delete - {message.id}</span>
                 </Button>
               </CardFooter>
             </Card>
