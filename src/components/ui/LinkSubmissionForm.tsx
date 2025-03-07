@@ -19,9 +19,10 @@ export default function LinkSubmissionForm({ onSubmit }: FormProps) {
     setMessage("")
   }
 
-  const handleClipboardSubmit = (event: React.FormEvent) => {
+  const handleClipboardSubmit = async (event: React.FormEvent) => {
+    const clippedText = await navigator.clipboard.readText();
     event.preventDefault()
-    onSubmit(message)
+    onSubmit(clippedText)
     setMessage("")
   }
 
@@ -31,7 +32,7 @@ export default function LinkSubmissionForm({ onSubmit }: FormProps) {
         <Textarea
           name="message"
           id="message"
-          placeholder="Paste your link here..."
+          placeholder="Note here..."
           rows={4}
           maxLength={800}
           autoFocus
@@ -39,10 +40,10 @@ export default function LinkSubmissionForm({ onSubmit }: FormProps) {
           onChange={(e) => setMessage(e.target.value)}
         />
         <div className="flex items-center justify-between w-full mt-4">
-          <Button type="submit">Submit</Button>
+          <Button type="submit">Send</Button>
           <Button type="button" onClick={handleClipboardSubmit}>
             <Paperclip />
-            Clipboard
+            Send Copied 
           </Button>
         </div>
       </form>
