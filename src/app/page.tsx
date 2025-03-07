@@ -1,7 +1,7 @@
 "use client"
 import { useEffect, useState } from "react"
 import { Card } from "@/components/ui/card"
-import LinkSubmissionForm from "@/components/ui/LinkSubmissionForm"
+import LinkSubmissionForm from "@/components/LinkSubmissionForm"
 import MessagesList from "@/lib/messages/MessagesList"
 import { Message } from "@/types/messages"
 
