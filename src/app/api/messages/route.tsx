@@ -1,4 +1,4 @@
-//The API Layer to provde for Cross-Platfom
+//The API Layer to provide for Cross-Platform
 import { NextResponse, NextRequest } from "next/server"
 import {
   getMessages,
@@ -6,14 +6,20 @@ import {
   saveMessage,
 } from "@/lib/messages/messagesDB"
 import { Message } from "@/types/messages"
+import { auth } from "@clerk/nextjs/server"
 
-// Handle GET requests (retrieve all messages)
-export async function GET(): Promise<
+// Handle GET requests (retrieve all messages for the authenticated user)
+export async function GET(request: NextRequest): Promise<
   NextResponse<Message[] | { error: string }>
 > {
   try {
-    // Fetch messages from the database
-    const messages: Message[] = await getMessages()
+    const { userId } = await auth() // Get the authenticated user's ID
+    if (!userId) {
+      return NextResponse.json({ error: "Unauthorized" }, { status: 401 })
+    }
+
+    // Fetch messages for the authenticated user
+    const messages: Message[] = await getMessages(userId)
     return NextResponse.json(messages, { status: 200 })
   } catch (error) {
     console.error("Error fetching messages:", error)
@@ -24,16 +30,23 @@ export async function GET(): Promise<
   }
 }
 
-// Handle DELETE requests (delete a message by ID)
+// Handle DELETE requests (delete a message by ID for the authenticated user)
 export async function DELETE(
   request: NextRequest
 ): Promise<NextResponse<{ success: boolean } | { error: string }>> {
   try {
+    const { userId } = await auth() // Get the authenticated user's ID
+    if (!userId) {
+      return NextResponse.json({ error: "Unauthorized" }, { status: 401 })
+    }
+
     const { id } = await request.json() // Extract the ID from the request body
     if (!id) {
       return NextResponse.json({ error: "ID is required" }, { status: 400 })
     }
-    await deleteMessage(id) // Delete the message from the database
+
+    // Delete the message for the authenticated user
+    await deleteMessage(id, userId)
     return NextResponse.json({ success: true }, { status: 200 })
   } catch (error) {
     console.error("Error deleting message:", error)
@@ -44,17 +57,29 @@ export async function DELETE(
   }
 }
 
-//Handle POST requests (add a message)
+// Handle POST requests (add a message for the authenticated user)
 export async function POST(
   request: NextRequest
 ): Promise<NextResponse<Message | { error: string }>> {
-  // Parse the request body to get the message content
-  const content = await request.json()
+  try {
+    const { userId } = await auth() // Get the authenticated user's ID
+    if (!userId) {
+      return NextResponse.json({ error: "Unauthorized" }, { status: 401 })
+    }
 
-  // const testString = content.toString()
-  // console.log("Test String:", testString)
-  // console.log("Test String 2:", testString2)
-  // console.log("Content:", content)
-  const newMessage = await saveMessage(content.content)
-  return NextResponse.json(newMessage, { status: 201 })
+    const { content } = await request.json() // Parse the request body
+    if (!content) {
+      return NextResponse.json({ error: "Content is required" }, { status: 400 })
+    }
+
+    // Save the message for the authenticated user
+    const newMessage = await saveMessage(content, userId)
+    return NextResponse.json(newMessage, { status: 201 })
+  } catch (error) {
+    console.error("Error adding message:", error)
+    return NextResponse.json(
+      { error: "Failed to add message" },
+      { status: 500 }
+    )
+  }
 }

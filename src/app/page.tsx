@@ -74,7 +74,7 @@ export default function Home() {
     <>
       <div className="flex flex-col border-dotted items-center justify-center min-h-screen p-4">
         <Card className="text-gray-600">
-          <div className="flex flex-col items-center justify-center w-full max-w-md p-6 space-y-4 bg-white rounded-lg shadow-md">
+          <div className="flex flex-col items-center justify-center w-full max-w-md p-6 space-y-4 bg-amber-100 rounded-lg shadow-md">
             <h1 className="text-2xl font-bold">Welcome to OnlyLinks...</h1>
             We get it done.
             <LinkSubmissionForm onSubmit={handleAddMessage} />

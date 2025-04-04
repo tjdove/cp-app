@@ -1,6 +1,6 @@
 "use client"
 import { Message } from "@/types/messages"
-import { Card, CardTitle, CardContent, CardFooter } from "@/components/ui/card"
+import { Card, CardContent, CardFooter } from "@/components/ui/card"
 import { Button } from "@/components/ui/button"
 import { Trash2 } from "lucide-react"
 import { Badge } from "@/components/ui/badge"
@@ -18,11 +18,11 @@ export default function MessagesList({
     //min-h-screen removed
     <div className=" bg-gradient-to-br from-blue-50 to-purple-50 p-8">
       <div className="max-w-4xl mx-auto">
-        <Card className="mb-1">
-          <CardTitle className="text-3xl font-bold text-center">
-            Links
-          </CardTitle>
-        </Card>
+        <div className="mb-1">
+          <div className="text-3xl font-bold text-center">
+            Links:
+          </div>
+        </div>
 
         <div className="space-y-4">
           {messages.map((message) => (
