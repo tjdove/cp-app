@@ -9,7 +9,7 @@ import { Message } from "@/types/messages"
 import { auth } from "@clerk/nextjs/server"
 
 // Handle GET requests (retrieve all messages for the authenticated user)
-export async function GET(request: NextRequest): Promise<
+export async function GET(): Promise<
   NextResponse<Message[] | { error: string }>
 > {
   try {
