@@ -16,32 +16,31 @@ export default function MessagesList({
 }: MessagesListProps) {
   return (
     //min-h-screen removed
-    <div className=" bg-gradient-to-br from-blue-50 to-purple-50 p-8">
+
       <div className="max-w-4xl mx-auto">
-        <div className="mb-1">
+        {/* <div className="mb-1">
           <div className="text-3xl font-bold text-center">
             Links:
           </div>
-        </div>
+        </div> */}
 
         <div className="space-y-4">
           {messages.map((message) => (
             <Card
-              key={message.id}
-              className="hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1 border-l-4 border-primary rounded-lg overflow-hidden"
-            >
-              <CardContent className="pt-2">
-                <p className="text-base font-medium text-card-foreground leading-relaxed">
-                  {message.content}
-                </p>
-              </CardContent>
-              <CardFooter className="flex justify-end pb-4">
+            key={message.id}
+            className="bg-[#ffce95] hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1 border-l-4 border-primary rounded-lg overflow-hidden flex flex-col h-full"
+          >
+            <CardContent className="p-4 flex-grow">
+              <p className="text-base font-medium text-card-foreground leading-relaxed">
+                {message.content}
+              </p>
+            </CardContent>
+            
+            <CardFooter className="flex items-center justify-between px-4 pb-3 pt-2 bg-white/10">
+              <div className="flex items-center space-x-2">
                 <Badge
-                  variant={
-                    message.messageType === "text" ? "outline" : "secondary"
-                  }
-                  className="mb-2"
-                  key={message.id}
+                  variant={message.messageType === "text" ? "outline" : "secondary"}
+                  className="py-1 px-2"
                 >
                   <span className="text-xs text-muted-foreground font-mono">
                     {new Date(message.timestamp).toLocaleString("en-US", {
@@ -55,17 +54,19 @@ export default function MessagesList({
                     })}
                   </span>
                 </Badge>
-                <Button
-                  variant="ghost"
-                  size="sm"
-                  className="text-destructive hover:bg-destructive/10 hover:text-destructive"
-                  onClick={() => onDelete(Number(message.id))}
-                >
-                  <Trash2 className="h-4 w-4 mr-2" />
-                  <span>Delete</span>
-                </Button>
-              </CardFooter>
-            </Card>
+              </div>
+              
+              <Button
+                variant="ghost"
+                size="sm"
+                className="text-destructive hover:bg-destructive/10 hover:text-destructive px-2 py-1"
+                onClick={() => onDelete(Number(message.id))}
+              >
+                <Trash2 className="h-4 w-4 mr-1" />
+                <span className="sr-only md:not-sr-only">Delete</span>
+              </Button>
+            </CardFooter>
+          </Card>
           ))}
         </div>
 
@@ -75,6 +76,5 @@ export default function MessagesList({
           </Button>
         </div>
       </div>
-    </div>
   )
 }
