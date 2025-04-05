@@ -15,15 +15,8 @@ export default function MessagesList({
   onDelete,
 }: MessagesListProps) {
   return (
-    //min-h-screen removed
 
       <div className="max-w-4xl mx-auto">
-        {/* <div className="mb-1">
-          <div className="text-3xl font-bold text-center">
-            Links:
-          </div>
-        </div> */}
-
         <div className="space-y-4">
           {messages.map((message) => (
             <Card

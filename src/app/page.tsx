@@ -1,6 +1,5 @@
 "use client"
 import { useEffect, useState } from "react"
-import { Card } from "@/components/ui/card"
 import LinkSubmissionForm from "@/components/LinkSubmissionForm"
 import MessagesList from "@/lib/messages/MessagesList"
 import { Message } from "@/types/messages"
@@ -71,18 +70,6 @@ export default function Home() {
   }
 
   return (
-    // <>
-    //   <div className="flex flex-col border-dotted items-center justify-center min-h-screen p-4">
-    //     <Card className="text-gray-600">
-    //       <div className="flex flex-col items-center justify-center w-full max-w-md p-6 space-y-4 bg-amber-100 rounded-lg shadow-md">
-    //         <h1 className="text-2xl font-bold">Welcome to OnlyLinks...</h1>
-    //         We get it done.
-    //         <LinkSubmissionForm onSubmit={handleAddMessage} />
-    //         <MessagesList messages={messages} onDelete={handleDelete} />
-    //       </div>
-    //     </Card>
-    //   </div>
-    // </>
     <>
   <div className="flex flex-col items-center justify-center min-h-screen p-4 bg-amber-50">
     <div className="w-full max-w-md">
@@ -94,11 +81,7 @@ export default function Home() {
           <div className="flex flex-col items-center justify-center space-y-2">
             <h1 className="text-3xl font-bold text-amber-50">Welcome to OnlyLinks</h1>
             <p className="text-amber-200 italic font-medium">We get it done.</p>
-            
-            {/* <div className="w-full p-6 bg-amber-100 rounded-lg shadow-inner border border-amber-200"> */}
               <LinkSubmissionForm onSubmit={handleAddMessage} />
-            {/* </div> */}
-            
             <div className="w-full p-6 bg-[#643016] rounded-lg border-brown-700">
               <h2 className="text-xl font-semibold text-amber-200 mb-4">
                 Your Links
