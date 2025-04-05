@@ -54,7 +54,7 @@ export default function LinkSubmissionForm({ onSubmit }: FormProps) {
           autoFocus
           value={message}
           onChange={(e) => setMessage(e.target.value)}
-          className="w-full p-3 rounded-lg bg-[#ffce95] text-white placeholder-[#b6a89e] focus:outline-none focus:ring-2 focus:ring-[#7da7c5] border border-[#6b4b3f]"
+          className="w-full p-3 rounded-lg bg-[#ffce95] text-[#111006] placeholder-[#b6a89e] focus:outline-none focus:ring-2 focus:ring-[#7da7c5] border border-[#6b4b3f]"
         />
         <div className="flex items-center justify-between w-full mt-4">
           <Button

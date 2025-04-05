@@ -59,7 +59,7 @@ export default function MessagesList({
               <Button
                 variant="ghost"
                 size="sm"
-                className="text-destructive hover:bg-destructive/10 hover:text-destructive px-2 py-1"
+                className="border text-destructive hover:bg-destructive/10 hover:text-destructive px-2 py-1"
                 onClick={() => onDelete(Number(message.id))}
               >
                 <Trash2 className="h-4 w-4 mr-1" />
@@ -70,11 +70,12 @@ export default function MessagesList({
           ))}
         </div>
 
-        <div className="mt-8 text-center">
-          <Button variant="outline" onClick={() => window.location.reload()}>
+        <div className="mt-8 text-center py-2">
+          <Button variant="outline" onClick={() => window.location.reload()}
+            className ="w-full bg-[#d9822b] hover:bg-[#f39c49] text-white font-semibold py-2 px-4 rounded-xl transition duration-200 shadow-sm">
             Refresh Messages
           </Button>
         </div>
       </div>
-  )
+      )
 }

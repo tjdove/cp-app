@@ -64,7 +64,7 @@ export default function Home() {
       }
 
       const newMessage: Message = await response.json()
-      setMessages((prevMessages) => [...prevMessages, newMessage])
+      setMessages((prevMessages) => [newMessage,...prevMessages])
     } catch (error) {
       console.error("Error adding message:", error)
     }
@@ -91,7 +91,7 @@ export default function Home() {
         <div className="absolute bottom-0 left-0 w-32 h-32 -ml-10 -mb-10 bg-orange-500 opacity-20 rounded-full blur-xl"></div>
         
         <div className="relative p-8">
-          <div className="flex flex-col items-center justify-center space-y-6">
+          <div className="flex flex-col items-center justify-center space-y-2">
             <h1 className="text-3xl font-bold text-amber-50">Welcome to OnlyLinks</h1>
             <p className="text-amber-200 italic font-medium">We get it done.</p>
             
@@ -104,12 +104,6 @@ export default function Home() {
                 Your Links
               </h2>
               <MessagesList messages={messages} onDelete={handleDelete} />
-            </div>
-            
-            <div className="flex items-center justify-center w-full mt-4">
-              <div className="h-1 w-1/5 bg-blue-400 rounded-full mx-1"></div>
-              <div className="h-1 w-1/5 bg-amber-400 rounded-full mx-1"></div>
-              <div className="h-1 w-1/5 bg-orange-400 rounded-full mx-1"></div>
             </div>
           </div>
         </div>
